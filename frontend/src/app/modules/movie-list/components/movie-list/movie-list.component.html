@@ -1,0 +1,16 @@
+<div class="filter">
+  <p>Filtra por año:</p>
+  <select [(ngModel)]="selectedYear" (change)="onChangeYear()">
+    <option [value]="year" *ngFor="let year of years">{{ year }}</option>
+  </select>
+</div>
+<div
+  class="list-cont"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="onScroll()"
+  *ngIf="movies"
+>
+  <app-movie-item [item]="item" *ngFor="let item of movies"></app-movie-item>
+</div>

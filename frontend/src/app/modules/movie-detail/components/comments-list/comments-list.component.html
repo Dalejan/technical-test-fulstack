@@ -1,0 +1,32 @@
+<div class="input-form">
+  <input type="text" [(ngModel)]="text" />
+  <button
+    (click)="comment()"
+    class="btn"
+    *ngIf="user_id; else notLogged"
+    [disabled]="!text"
+  >
+    Comentar
+  </button>
+  <ng-template #notLogged
+    ><button (click)="login()" class="btn">Ingresa para comentar</button>
+  </ng-template>
+</div>
+
+<ng-container *ngIf="comments; else load">
+  <div class="comment" *ngFor="let comment of comments">
+    <p [ngClass]="user_id == comment.user_id ? 'user my-user' : 'user'">
+      {{ user_id == comment.user_id ? "Yo" : comment.user_id }}
+    </p>
+    <p class="date">
+      {{
+        (!comment.updated_at ? comment.created_at : comment.updated_at) | date
+      }}
+    </p>
+    <p class="text">
+      {{ comment.text }}
+    </p>
+  </div>
+</ng-container>
+
+<ng-template #load>Cargando comentarios...</ng-template>

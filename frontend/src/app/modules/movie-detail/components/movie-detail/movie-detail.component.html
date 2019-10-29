@@ -1,0 +1,62 @@
+<a routerLink="/home/list">Volver</a>
+<ng-container *ngIf="movie; else loading">
+  <div class="top-cont">
+    <div
+      class="movie-image"
+      [defaultImage]="'assets/images/bg.jpg'"
+      [lazyLoad]="movie.poster_path | movieImage"
+    ></div>
+    <div class="whole-metadata">
+      <div class="important-data">
+        <p class="movie-title">
+          {{ movie.title }}
+        </p>
+        <p class="movie-release-date">
+          {{ movie.release_date }}
+        </p>
+        <p class="movie-adult" *ngIf="movie.adult">
+          Para adultos
+        </p>
+      </div>
+
+      <p class="desc">
+        {{ movie.overview ? movie.overview : "Una película maravillosa" }}
+      </p>
+      <div class="rank">
+        Calificación: {{ rankNumber ? rankNumber : 0 }} / 5.0
+      </div>
+      <div class="setRank">
+        <p>
+          Mi calificación:
+        </p>
+        <rating [(ngModel)]="stars" class="stars"></rating>
+        <button
+          class="btn btn-rank"
+          *ngIf="user; else notLogged"
+          (click)="rank(movie.id, user.email, stars)"
+          [disabled]="!stars"
+        >
+          votar
+        </button>
+        <ng-template #notLogged>
+          <button class="btn btn-loggin" (click)="login()">
+            Ingresa para votar
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <p class="comments-title">Comentarios</p>
+  <app-comments-list
+    class="comment-list"
+    [movie_id]="movie.id"
+    [user_id]="user?.email"
+  ></app-comments-list>
+</ng-container>
+
+<ng-template #loading>
+  <p class="err-msg">
+    Cargando ...
+  </p>
+</ng-template>

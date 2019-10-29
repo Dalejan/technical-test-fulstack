@@ -1,0 +1,8 @@
+<div class="cont" *ngIf="item" (click)="goToDetail()">
+  <div
+    class="movie-img"
+    [defaultImage]="'assets/images/bg.jpg'"
+    [lazyLoad]="item.poster_path | movieImage"
+  ></div>
+  <p class="movie-title">{{ item.original_title }}</p>
+</div>

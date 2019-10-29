@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  background-color: black;
+  color: white;
+}
+
+.big-cont {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  // padding: 30px;
+}
+
+.btn {
+  border-style: none;
+  border-radius: 5px;
+  color: black;
+  background: yellow;
+}
+
+@media (min-width: 350px) {
+  .big-cont {
+    padding: 30px;
+  }
+}

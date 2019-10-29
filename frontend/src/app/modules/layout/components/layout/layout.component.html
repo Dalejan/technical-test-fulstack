@@ -1,0 +1,47 @@
+<!-- header -->
+<div class="header">
+  <div class="menu-icon" (click)="onToggleMenu()">
+    <div [ngClass]="blMenu ? 'container' : 'container change'">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+  </div>
+  Mov!es
+  <span
+    *ngIf="authService.isAuthenticated$ | async"
+    class="options"
+    (click)="onLogout()"
+    >Salir
+  </span>
+  <span
+    *ngIf="!(authService.isAuthenticated$ | async)"
+    class="options"
+    (click)="onLogin()"
+    >Ingresar
+  </span>
+</div>
+<div class="cont">
+  <!-- menu -->
+  <div [ngClass]="!blMenu ? 'menu menu-open' : 'menu menu-closed'">
+    <div
+      class="menu-item"
+      routerLinkActive="menu-item-selected"
+      *ngFor="let menuItem of menu"
+      [routerLink]="[menuItem.url]"
+    >
+      {{ menuItem.label }}
+    </div>
+
+    <div
+      class="logout"
+      *ngIf="authService.isAuthenticated$ | async"
+      (click)="onLogout()"
+    >
+      Salir
+    </div>
+  </div>
+
+  <!-- contenido -->
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,31 @@
+.filter {
+  display: flex;
+  font-size: 1.3rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 25px 0px;
+
+  p {
+    margin: 0;
+    margin-right: 10px;
+  }
+
+  select {
+    background: none;
+    color: white;
+    border: none;
+    width: 5rem;
+    border-bottom: 1px solid;
+
+    option {
+      background: black;
+    }
+  }
+}
+
+.list-cont {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
