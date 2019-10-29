@@ -1,0 +1,3 @@
+#Ignora en los commits
+node_modules
+.env
