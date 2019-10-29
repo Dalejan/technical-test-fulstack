@@ -26,7 +26,7 @@ export class MovieListComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
 
   constructor(private movieService: MoviesService) {
-    for (let i = 0; i <= 10; i++) {
+    for (let i = 9; i <= 19; i++) {
       (i + "").length > 1
         ? this.years.push(parseInt(20 + `${i}`))
         : this.years.push(parseInt(200 + `${i}`));
