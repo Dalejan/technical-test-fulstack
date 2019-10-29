@@ -16,7 +16,10 @@ import {
   updateRankErrorAction,
   loadMovieRankAction,
   loadMovieRankSuccessAction,
-  loadMovieRankErrorAction
+  loadMovieRankErrorAction,
+  deleteMovieRankAction,
+  deleteMovieRankSuccessAction,
+  deleteMovieRankErrorAction
 } from "./ranks.actions";
 
 export const actions = {
@@ -34,5 +37,8 @@ export const actions = {
   updateRankErrorAction,
   loadMovieRankAction,
   loadMovieRankSuccessAction,
-  loadMovieRankErrorAction
+  loadMovieRankErrorAction,
+  deleteMovieRankAction,
+  deleteMovieRankSuccessAction,
+  deleteMovieRankErrorAction
 };

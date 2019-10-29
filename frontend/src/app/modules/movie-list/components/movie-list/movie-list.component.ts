@@ -64,6 +64,7 @@ export class MovieListComponent implements OnInit {
    * @param page number página seleccionada para la búsqueda
    */
   getMovies(selectedYear: number, page: number) {
+    console.log(selectedYear, page);
     this.movieService
       .getMovies(selectedYear, page)
       .pipe(takeUntil(this.unsubscribe$))

@@ -14,6 +14,10 @@ export const LOAD_MOVIE_RANK = "[RANKS] Load movie Rank";
 export const LOAD_MOVIE_RANK_SUCCESS = "[RANKS] Load movie Rank success";
 export const LOAD_MOVIE_RANK_ERROR = "[RANKS] Load movie Rank error";
 
+export const DELETE_MOVIE_RANK = "[RANKS] Delete movie rank";
+export const DELETE_MOVIE_RANK_SUCCESS = "[RANKS] Delete movie rank success";
+export const DELETE_MOVIE_RANK_ERROR = "[RANKS] Delete movie rank error";
+
 export class doRankAction implements Action {
   readonly type = DO_RANK;
   constructor(public rank: Rank) {}
@@ -59,6 +63,21 @@ export class loadMovieRankErrorAction implements Action {
   constructor(public errors: string) {}
 }
 
+export class deleteMovieRankAction implements Action {
+  readonly type = DELETE_MOVIE_RANK;
+  constructor(public rank_id: string) {}
+}
+
+export class deleteMovieRankSuccessAction implements Action {
+  readonly type = DELETE_MOVIE_RANK_SUCCESS;
+  constructor(public rank_id: string) {}
+}
+
+export class deleteMovieRankErrorAction implements Action {
+  readonly type = DELETE_MOVIE_RANK_ERROR;
+  constructor(public errors: string) {}
+}
+
 export type Actions =
   | doRankAction
   | updateRankAction
@@ -68,4 +87,7 @@ export type Actions =
   | updateRankErrorAction
   | loadMovieRankAction
   | loadMovieRankSuccessAction
-  | loadMovieRankErrorAction;
+  | loadMovieRankErrorAction
+  | deleteMovieRankAction
+  | deleteMovieRankSuccessAction
+  | deleteMovieRankErrorAction;

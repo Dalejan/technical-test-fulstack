@@ -5,7 +5,7 @@
  */
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { takeUntil, map } from "rxjs/operators";
+import { takeUntil, map, take } from "rxjs/operators";
 import { Subject, Observable, of } from "rxjs";
 import { MoviesService } from "src/app/services/movies/movies.service";
 import { AuthService } from "src/app/services/auth/auth.service";
@@ -52,6 +52,11 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   public rankNumber: number;
 
   /**
+   * id del rank otorgado
+   */
+  public rank_id: string;
+
+  /**
    * subject para cancelar la subsripción manual una vez se destruya el componente
    */
   private unsubscribe$ = new Subject<void>();
@@ -88,16 +93,20 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
       // obtiene el rank que otorgó el usuario
       if (!this.user) return;
       if (ranks.filter(rank => rank.user_id === this.user.email)[0]) {
-        this.stars = ranks.filter(
-          rank => rank.user_id === this.user.email
-        )[0].value;
+        const rank = ranks.filter(rank => rank.user_id === this.user.email)[0];
+        this.stars = rank.value;
+        this.rank_id = rank.id;
         this.shouldUpdateRank = true;
       } else {
         this.stars = 0;
+        this.shouldUpdateRank = false;
       }
 
       // calcula el promedio de ranks
-      if (!ranks.length) return;
+      if (!ranks.length) {
+        this.rankNumber = 0;
+        return;
+      }
       this.rankNumber =
         ranks
           .map(rank => rank.value)
@@ -126,11 +135,20 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Elimina el rank que el usuario haya otorgado
+   */
+  async deleteRank() {
+    this.store.dispatch(new fromRanks.deleteMovieRankAction(this.rank_id));
+    this.rank_id = null;
+  }
+
+  /**
    * Para ingresar en caso de no estar autenticado
    */
   login() {
     this.authService.login();
   }
+
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

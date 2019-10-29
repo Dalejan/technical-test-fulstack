@@ -30,6 +30,7 @@
           Mi calificación:
         </p>
         <rating [(ngModel)]="stars" class="stars"></rating>
+
         <button
           class="btn btn-rank"
           *ngIf="user; else notLogged"
@@ -37,6 +38,13 @@
           [disabled]="!stars"
         >
           votar
+        </button>
+        <button
+          class="btn btn-delete-rank"
+          *ngIf="user && stars && rank_id"
+          (click)="deleteRank(movie.id, user.email)"
+        >
+          borrar
         </button>
         <ng-template #notLogged>
           <button class="btn btn-loggin" (click)="login()">

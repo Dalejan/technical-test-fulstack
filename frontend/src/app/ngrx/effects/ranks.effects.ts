@@ -55,7 +55,7 @@ export class ranksEffects {
   );
 
   /**
-   * doRank$ - effect : Efecto encargado de crear un comentario
+   * fetchRanks$ - effect : Efecto encargado de crear un comentario
    */
   @Effect()
   fetchRanks$ = this.actions$.pipe(
@@ -63,11 +63,30 @@ export class ranksEffects {
     map((action: string) => action),
     switchMap((payload: any) => {
       return this.moviesService.getAllRank(payload.movie_id).pipe(
-        map(rank => {
-          return new fromRanks.loadMovieRankSuccessAction(rank);
+        map(ranks => {
+          return new fromRanks.loadMovieRankSuccessAction(ranks);
         }),
         catchError(error => {
           return of(new fromRanks.loadMovieRankErrorAction(error));
+        })
+      );
+    })
+  );
+
+  /**
+   * deleteRank$ - effect : Efecto encargado de crear un comentario
+   */
+  @Effect()
+  deleteRank$ = this.actions$.pipe(
+    ofType(fromRanks.DELETE_MOVIE_RANK),
+    map((action: string) => action),
+    switchMap((payload: any) => {
+      return this.moviesService.deleteRank(payload.rank_id).pipe(
+        map(rank_id => {
+          return new fromRanks.deleteMovieRankSuccessAction(rank_id);
+        }),
+        catchError(error => {
+          return of(new fromRanks.deleteMovieRankErrorAction(error));
         })
       );
     })

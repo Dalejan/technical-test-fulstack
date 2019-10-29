@@ -43,6 +43,17 @@ export function ranksReducer(
     case fromRanks.LOAD_MOVIE_RANK_ERROR:
       return { ranks: [], errors: action.errors };
 
+    case fromRanks.DELETE_MOVIE_RANK_SUCCESS:
+      const new_ranks = [...state.ranks];
+      const toDelete = new_ranks
+        .map((rank, i) => rank.id === action.rank_id)
+        .indexOf(true);
+      new_ranks.splice(toDelete, 1);
+      return { ranks: [...new_ranks], errors: "" };
+
+    case fromRanks.DELETE_MOVIE_RANK_ERROR:
+      return { ranks: [], errors: action.errors };
+
     default:
       return state;
   }

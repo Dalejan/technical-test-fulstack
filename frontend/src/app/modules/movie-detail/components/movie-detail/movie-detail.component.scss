@@ -68,6 +68,8 @@ a {
 .setRank {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+
   .stars {
     margin-bottom: 5px;
   }
@@ -94,6 +96,11 @@ a {
   .setRank {
     margin-top: 10px;
     flex-direction: column;
+
+    .btn-delete-rank {
+      margin-left: 0;
+      margin-top: 10px;
+    }
   }
 }
 

@@ -30,8 +30,8 @@ export class MoviesService {
    * @param year number - Año de filtro para películas
    * @param page number - Página de resultados
    */
-  getMovies(year: number = 2000, page: number = 1): Observable<any> {
-    if (year < 2000 || year > 2010) {
+  getMovies(year: number = 2009, page: number = 1): Observable<any> {
+    if (year < 2009 || year > 2019) {
       return;
     }
 
@@ -110,5 +110,15 @@ export class MoviesService {
    */
   updateRank(rank: Rank) {
     return this.httpClient.patch<Rank>(`${this.myApiUrl}/ranks`, { rank });
+  }
+
+  /**
+   * Elimina un rank en específico
+   * @param rank_id string id del rank a eliminar
+   */
+  deleteRank(rank_id: string) {
+    return this.httpClient.delete<any>(
+      `${this.myApiUrl}/ranks?rank_id=${rank_id}`
+    );
   }
 }

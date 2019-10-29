@@ -30,9 +30,7 @@ export class doCommentErrorAction implements Action {
 
 export class loadCommentsAction implements Action {
   readonly type = LOAD_COMMENTS;
-  constructor(public movie_id: string) {
-    console.log("load comments!");
-  }
+  constructor(public movie_id: string) {}
 }
 
 export class loadCommentsSuccessAcion implements Action {

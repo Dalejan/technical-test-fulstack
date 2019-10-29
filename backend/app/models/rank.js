@@ -57,7 +57,7 @@ const createRankPromise = rank => {
     .raw(
       "INSERT INTO ranks (value, user_id,  movie_id)" +
         "VALUES (?, ?, ?)" +
-        "RETURNING value, user_id, movie_id",
+        "RETURNING value, user_id, movie_id, id",
 
       [rank.value, rank.user_id, rank.movie_id]
     )
@@ -74,7 +74,7 @@ const updateRankPromise = rank => {
   return database
     .raw(
       "UPDATE ranks set value = ? WHERE user_id= ? AND movie_id= ?" +
-        "RETURNING value, user_id, movie_id",
+        "RETURNING value, user_id, movie_id, id",
 
       [rank.value, rank.user_id, rank.movie_id]
     )
@@ -83,12 +83,8 @@ const updateRankPromise = rank => {
 
 const deleteRankPromise = rank_id => {
   return database
-    .raw(
-      "DELETE FROM ranks WHERE id = ?",
-
-      [rank.id]
-    )
-    .then(data => data.rows[0], err => console.log(err));
+    .raw("DELETE FROM ranks WHERE id = ?", [rank_id])
+    .then(data => `${rank_id}`, err => console.log(err));
 };
 
 // Exporta las funciones
